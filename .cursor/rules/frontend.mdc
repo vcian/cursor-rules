@@ -1,0 +1,16 @@
+---
+description: Follow these rules when working on the frontend.
+globs: 
+---
+
+### Folder Structure
+
+-   `app/Repositories/Frontend/` → Stores repository classes for frontend-specific logic.
+-   `app/Models/Frontend/` → Stores frontend-related models.
+-   `app/Http/Controllers/Frontend/` → Contains frontend API controllers.
+-   `resources/views/frontend/` → Blade templates for frontend.
+
+### Frontend Stack
+
+-   **CSS Framework**: Tailwind CSS
+-   **JavaScript Library**: jQuery

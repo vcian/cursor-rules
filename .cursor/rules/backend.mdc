@@ -1,0 +1,20 @@
+---
+description: Follow these rules when working on the backend.
+globs: 
+---
+### Folder Structure & Code Organization
+
+-   `app/Repositories/Backend/` → Stores repository classes handling database interactions.
+-   `app/Models/Backend/` → Stores models related to backend operations.
+-   `app/Http/Controllers/Backend/` → Contains backend API controllers.
+
+### Object-Oriented Programming (OOP) Principles
+
+-   **Encapsulation:** Keep properties and methods private/protected where applicable.
+-   **Abstraction:** Define interfaces for repositories and implement them.
+-   **Inheritance:** Utilize Laravel's base classes where applicable.
+-   **Polymorphism:** Use dependency injection and interface binding in repositories.
+-   **Separation of Concerns:**
+    -   **Controllers** should only handle HTTP requests and responses.
+    -   **Repositories** should manage all data-related logic.
+    -   **Models** should represent database entities.

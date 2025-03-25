@@ -1,0 +1,133 @@
+---
+description: Follow these rules for all requests.
+globs: 
+---
+## General Rules
+
+### Project Description
+
+This project follows the **Laravel framework (10+)** to build a scalable, secure, and high-performance web application. It implements a structured **Repository Pattern** to separate business logic from controllers, ensuring maintainability and testability.  
+
+### Tech Stack & Dependencies
+
+- **Framework**: Laravel 10+  
+- **PHP Version**: 8.1+  
+- **Database**: MySQL
+- **ORM**: Eloquent  
+- **Queue Management**: Laravel Queues (default driver)  
+- **Authentication**: Laravel Sanctum / Passport  
+- **Testing**: PHPUnit, Laravel Dusk  
+- **Deployment**: Nginx, Supervisor, Docker (if applicable)  
+- **Package Manager**: Composer  
+- **Frontend**: Blade with Tailwind CSS and jQuery  
+
+---
+
+### Coding Standards & Conventions
+
+#### General Guidelines
+- Follow **PSR-12** coding standards and **PSR-4** autoloading for class structure.
+- Always **type hint** function parameters and return values.
+- Use meaningful **variable and function names** (avoid single-letter variables except in loops).
+- Avoid **magic numbers and strings**; use constants or configuration files instead.
+- **Comment your code** properly using PHPDoc.
+
+#### Naming Conventions
+- Use **camelCase** for variables and method names.
+- Use **PascalCase** for class names.
+- Use **snake_case** for database column names.
+- Prefix interfaces with `Interface` (e.g., `UserRepositoryInterface`).
+- Prefix traits with `Trait` (e.g., `HasRolesTrait`).
+
+#### Controller Best Practices
+- Keep controllers clean by following **Separation of Concerns**.
+- Controllers should only handle **HTTP requests and responses**.
+- Use **Repository Pattern** to separate database queries from controllers.
+- Use **Form Requests** for input validation.
+
+Example of a clean controller method:
+```php
+use App\Http\Requests\UpdateUserRequest;
+use App\Repositories\UserRepository;
+
+class UserController extends Controller
+{
+    protected UserRepository $userRepository;
+
+    /**
+     * UserController Constructor.
+     *
+     * @param UserRepository $userRepository
+     */
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
+    /**
+     * Update the specified user.
+     *
+     * @param UpdateUserRequest $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function update(UpdateUserRequest $request, int $id): JsonResponse
+    {
+        $user = $this->userRepository->updateUser($id, $request->validated());
+        return response()->json(['message' => 'User updated successfully', 'user' => $user]);
+    }
+}
+```
+
+#### Service & Repository Best Practices
+
+-   Repositories should handle **database interactions**.
+-   Services should contain **business logic**.
+-   Avoid querying the database in controllers; instead, use repositories.
+
+Example of a repository method:
+```php
+namespace App\Repositories;
+
+use App\Models\User;
+
+class UserRepository extends BaseRepository
+{
+    /**
+     * Get a user by their ID.
+     *
+     * @param int $id
+     * @return User|null
+     */
+    public function getUserById(int $id): ?User
+    {
+        return $this->userModalInstance::find($id);
+    }
+
+    /**
+     * Update a user's information.
+     *
+     * @param int $id 
+     * @param array $data
+     * @return User|null
+     */
+    public function updateUser(int $id, array $data): ?User
+    {
+        $user = $this->userModalInstance::find($id);
+        if ($user) {
+            $user->update($data);
+        }
+        return $user;
+    }
+}
+```
+
+-   Use **try-catch blocks** for handling exceptions:
+
+```
+    try {
+        $user = User::findOrFail($id);
+    } catch (\Exception $exception) {
+        Log::error($exception);
+    }
+```
