@@ -1,0 +1,44 @@
+---
+description: Follow these rules when working on the folder structure.
+globs: 
+alwaysApply: false
+---
+## Folder Structure & Code Organization
+
+This project follows a clean and modular folder structure for maintainable and scalable development. All **business logic** resides inside **repositories**, and **controllers** remain clean and simple, handling only request/response logic.
+
+---
+
+### Frontend Structure
+
+- `app/Http/Controllers/Frontend/`  
+  → Handles **HTTP requests and responses** for public-facing features.  
+  → Controllers must be kept **thin**, only delegating to repositories or services.
+
+- `app/Models/Frontend/`  
+  → Contains **Eloquent models** tied to the frontend side of the application.
+
+- `app/Repositories/Frontend/`  
+  → Contains **repository classes** responsible for implementing **business logic** and **database interactions** for frontend use cases.
+
+- `resources/views/frontend/`  
+  → Blade templates used to render **public UI components**.
+
+---
+
+### Backend Structure
+
+- `app/Http/Controllers/Backend/`  
+  → Manages **admin/internal API or web routes**.  
+  → Should remain **slim**, delegating all logic to repositories or service layers.
+
+- `app/Models/Backend/`  
+  → Contains **backend-specific Eloquent models**, such as for user roles, permissions, and reports.
+
+- `app/Repositories/Backend/`  
+  → Contains **repository classes** encapsulating backend-related **business logic and queries**.
+
+- `resources/views/backend/`  
+  → Blade views used to render **admin or dashboard interfaces**.
+
+---
