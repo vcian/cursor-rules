@@ -1,7 +1,7 @@
 ---
-description: Follow these rules when working on the business logic.
+description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 # Business Logic Guidelines: Using Controller and Repository with OOP Concepts
 

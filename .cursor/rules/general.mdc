@@ -1,7 +1,7 @@
 ---
-description: Follow these rules for all requests.
+description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 ## General Rules
 

@@ -1,7 +1,7 @@
 ---
-description: Follow these rules when working on the folder structure.
+description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 ## Folder Structure & Code Organization
 
